@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD.mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.wanho.mapper.StudentMapper">
+<resultMap id="studentResultMap" type="net.wanho.model.Student">
+    <id column="id" property="id" jdbcType="DECIMAL"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="age" property="age" jdbcType="DECIMAL"/>
+    <result column="password" property="password" jdbcType="VARCHAR"/>
+</resultMap>
+    <sql id="student_field">
+        id,name,age,password
+    </sql>
+ <select id="getStudentList"  parameterType="net.wanho.model.Student" resultMap="studentResultMap">
+       SELECT <include refid="student_field"/> FROM student WHERE 1=1
+     <if test="null != student.name">
+         AND name LIKE CONCAT('%',#{student.name},'%')
+     </if>
+     <if test="null != student.age">
+         AND age=#{student.age}
+     </if>
+    </select>
+    <select id="checkStudent" parameterType="net.wanho.model.Student" resultMap="studentResultMap">
+        SELECT <include refid="student_field"/> FROM student WHERE name=#{name} AND `password`=#{password}
+    </select>
+
+    <select id="getStudentById" parameterType="int" resultMap="studentResultMap">
+        SELECT *  FROM  student WHERE id=#{id}
+    </select>
+
+
+    <insert id="addStudent" parameterType="net.wanho.model.Student">
+        INSERT INTO student VALUES (NULL ,#{name},#{age},#{password})
+    </insert>
+
+    <update id="updateStudent" parameterType="net.wanho.model.Student">
+        UPDATE student SET name=#{name},age=#{age},password=#{password} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteStudentById" parameterType="int">
+        DELETE FROM student WHERE id=#{id}
+    </delete>
+</mapper>
