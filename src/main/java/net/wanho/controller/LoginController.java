@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,16 +15,20 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by 胡梦娟 on 2018/11/27.
  */
-@Controller
+@RestController
 @RequestMapping("login")
 public class LoginController {
     @Autowired
     private StudentServiceI studentService;
 
-    @RequestMapping()
+    @RequestMapping("/")
+    String home(){
+        return "hello git!";
+    }
+ /*   @RequestMapping()
     public String showLogin(){
         return "login";
-    }
+    }*/
 
     @RequestMapping("checkLogin")
     @ResponseBody
