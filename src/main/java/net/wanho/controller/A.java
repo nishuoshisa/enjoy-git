@@ -5,7 +5,7 @@ package net.wanho.controller;
  */
 public class A {
     public static void main(String[] args) {
-        System.out.println("lzz master v0.8  ---merge  v11   2222");
+        System.out.println("lzz master v0.8  ---merge  v11   2222  33333 333333");
 
 
     }
